@@ -16,3 +16,9 @@ class ToolSerializer(serializers.Serializer):
         instance.description = validated_data.get('description', instance.description)
         instance.save()
         return instance
+    
+    def validate_name(self, value):
+        if len(value) == 0 or value == None:
+            raise serializers.ValidationError("Name is not set or NULL")
+        else:
+            return value
